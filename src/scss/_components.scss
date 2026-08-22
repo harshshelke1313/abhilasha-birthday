@@ -1,0 +1,450 @@
+// DECORATIONS
+
+.balloon {
+  grid-row: 1 / -1;
+  width: 130%;
+
+  &--left {
+    grid-column: balloon-l-start / balloon-l-end;
+    animation: balloon-move 4s linear 0s infinite;
+    @media (max-width: 800px) {
+      margin-left: -25%;
+    }
+
+    @media (max-width: 500px) {
+      margin-left: -40%;
+    }
+  }
+
+  &--right {
+    grid-column: balloon-r-start / balloon-r-end;
+    margin-left: -20%;
+    animation: balloon-move 4s linear 0s infinite reverse;
+    @media (max-width: 800px) {
+      margin-left: 25%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    width: 120%;
+  }
+}
+
+.flag {
+  grid-row: 1/2;
+  z-index: 0;
+
+  &--c-left {
+    grid-column: flag-cl-start / flag-cl-end;
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  &--c-right {
+    grid-column: flag-cr-start / flag-cr-end;
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  &--left {
+    grid-column: flag-l-start / flag-l-end;
+  }
+
+  &--right {
+    grid-column: flag-r-start / flag-r-end;
+  }
+
+  @media (max-width: 800px) {
+    transform: scale(1.2);
+    margin-top: 20%;
+  }
+}
+
+// BIRTHDAY CARD
+
+.img-back {
+  position: relative;
+  background-color: #ffa8dc;
+  height: 18rem;
+  width: 18rem;
+  border-radius: 50%;
+  margin: 0 auto;
+
+  @media (min-width: 600px) {
+    height: 22rem;
+    width: 22rem;
+  }
+}
+
+.bd-pic {
+  @include position;
+
+  height: 83.33333333%;
+  width: 83.33333333%;
+  overflow: hidden;
+
+  border-color: #fff;
+  border-style: dotted;
+  border-radius: 50%;
+
+  background-image: url(../pic.jpeg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cap {
+  @include position(-15%, 50%, 0, 0);
+
+  height: 33.33333333%;
+}
+
+.confetti {
+  @include position;
+
+  height: 150%;
+  width: 150%;
+}
+
+.cake {
+  @include position(90%);
+
+  height: 70%;
+  width: 70%;
+}
+
+.HBD-text {
+  width: 95%;
+  margin: 1rem auto;
+}
+
+.HBD {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  padding: 0 0.5rem;
+  line-height: 1.3;
+}
+
+.nickname {
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  padding: 0.5rem 0 0 0;
+}
+
+// SCROLL
+
+.scroll {
+  position: relative;
+  overflow-y: auto;
+  max-height: 80vh;
+  width: 90%;
+  max-width: 450px;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.5;
+  padding: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.text {
+  @include position(50%, 0, 0, 0);
+  text-align: center;
+}
+
+// BUTTONS
+
+.btn {
+  @include position(65%, 50%, 0, -50%);
+
+  display: none;
+  overflow: hidden;
+  height: 12rem;
+  width: 12rem;
+  min-width: 60px;
+  min-height: 60px;
+  cursor: pointer;
+  touch-action: manipulation;
+  z-index: 100;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  animation: heart-beat 2s linear 0s infinite alternate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-ref {
+  @include position(82%, 50%, -50%, 0);
+
+  text-align: center;
+
+  color: #fff;
+  display: none;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  width: 90%;
+  pointer-events: none;
+}
+
+.switch {
+  background-image: url("../resources/img/bulb.svg");
+}
+
+.gift {
+  background-image: url("../resources/img/gift.svg");
+}
+
+.door-in,
+.door-out {
+  background-image: url("../resources/img/door.svg");
+}
+
+//ROOMS
+
+.darkroom,
+.flash,
+.giftroom,
+.empty-room,
+.hallway {
+  text-align: center;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.darkroom {
+  background-color: #000;
+}
+
+.flash {
+  background-color: #fff;
+}
+
+.giftroom,
+.empty-room {
+  background-color: #141852;
+}
+
+.hallway {
+  background-image: radial-gradient(transparent, #000),
+    url(../resources/img/Hallway.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  overflow: hidden;
+}
+
+.empty-room,
+.giftroom,
+.content {
+  background-image: radial-gradient(transparent, rgba(0, 0, 0, 0.65)),
+    url(../resources/img/bedroom.svg);
+  background-position: 70%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+// TEXT CONTAINERS
+
+.bb-text,
+.gift-text,
+.hall-text,
+.room-text {
+  @include position(20%, 50%, -50%, -50%);
+
+  display: inline-block;
+  text-align: center;
+  width: 80vw;
+  opacity: 0;
+  font-size: 3.2rem;
+}
+
+// CANDLE -> https://codepen.io/rizqyhi/pen/BsAFn
+
+.velas {
+  background: #ffffff;
+  border-radius: 0.625rem;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  width: 1.5%;
+  height: 12%;
+  backface-visibility: hidden;
+}
+.velas:after,
+.velas:before {
+  background: rgba(255, 0, 0, 0.4);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5%;
+}
+.velas:after {
+  top: 25%;
+  left: 0;
+}
+.velas:before {
+  top: 45%;
+  left: 0;
+}
+
+/* Fire */
+
+.fuego {
+  border-radius: 100%;
+  position: absolute;
+  top: -50%;
+  left: 60%;
+  margin-left: -2.6px;
+  width: 100%;
+  height: 40%;
+}
+.fuego:nth-child(1) {
+  animation: fuego 2s 6.5s infinite;
+}
+.fuego:nth-child(2) {
+  animation: fuego 1.5s 6.5s infinite;
+}
+.fuego:nth-child(3) {
+  animation: fuego 1s 6.5s infinite;
+}
+.fuego:nth-child(4) {
+  animation: fuego 0.5s 6.5s infinite;
+}
+.fuego:nth-child(5) {
+  animation: fuego 0.2s 6.5s infinite;
+}
+
+/* Animation Fire */
+
+@keyframes fuego {
+  0%,
+  100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 250% 62.5% rgba(248, 233, 209, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 250% 125% rgba(248, 233, 209, 0.2);
+    transform: scale(0);
+  }
+}
+
+@keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+// POLAROID GALLERY COMPONENT
+
+.polaroid-gallery {
+  position: relative;
+  width: 90%;
+  max-width: 380px;
+  margin: 1.5rem auto 1rem auto;
+  z-index: 10;
+}
+
+.polaroid-cards-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.polaroid-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg) scale(0.9);
+  width: 200px;
+  background: #ffffff;
+  padding: 10px 10px 15px 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) rotate(0deg) scale(1);
+    pointer-events: auto;
+    z-index: 5;
+  }
+}
+
+.polaroid-img-box {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #f0f0f0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.polaroid-caption {
+  font-family: 'Courgette', cursive, sans-serif;
+  color: #333333;
+  font-size: 1.3rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.polaroid-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.polaroid-nav-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+  }
+}
+
+.polaroid-dots {
+  display: flex;
+  gap: 6px;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transition: background 0.3s ease;
+
+    &.active {
+      background: #ffa8dc;
+      transform: scale(1.2);
+    }
+  }
+}
+

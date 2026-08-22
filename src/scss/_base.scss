@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @media (max-width: 480px) {
+    font-size: 55%;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 70%;
+  }
+}
+
+body {
+  color: #fff;
+  font-family: "Courgette", cursive;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  touch-action: manipulation;
+}
+
