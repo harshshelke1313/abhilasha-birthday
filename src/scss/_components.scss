@@ -149,7 +149,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-// LOVE LETTER CARD & FRAME2
+// DEDICATED LOVE LETTER MODAL / CARD (FRAME2)
 
 .frame2 {
   position: absolute;
@@ -157,19 +157,30 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(15, 18, 55, 0.95);
-  display: flex;
+  background: rgba(20, 10, 35, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 50;
+  z-index: 999;
   padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+
+  &.active-frame {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
 }
 
 .letter-card {
-  background: linear-gradient(135deg, #2b1055, #6c3483);
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  background: #fff0f5;
+  border: 3px solid #ffb6c1;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   border-radius: 20px;
   padding: 2.5rem 2rem;
   width: 92%;
@@ -177,46 +188,76 @@
   max-height: 80vh;
   overflow-y: auto;
   text-align: center;
-  color: #ffffff;
+  color: #4a044e;
   -webkit-overflow-scrolling: touch;
 
   @media (max-width: 480px) {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.2rem;
     max-height: 82vh;
+  }
+}
+
+.letter-header {
+  margin-bottom: 1.5rem;
+
+  .letter-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Courgette', cursive, sans-serif;
+    font-size: clamp(2.2rem, 5vw, 2.8rem);
+    color: #881337;
   }
 }
 
 .letter-text {
   font-family: 'Courgette', cursive, sans-serif;
-  font-size: clamp(1.8rem, 4.5vw, 2.3rem);
-  line-height: 1.6;
-  color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  font-size: clamp(1.7rem, 4.2vw, 2.1rem);
+  line-height: 1.65;
+  color: #33102c;
+  text-align: left;
 
   p {
     margin-bottom: 1.2rem;
+  }
+
+  .signature {
+    margin-top: 1.8rem;
+    text-align: right;
+    color: #9f1239;
+    font-size: clamp(1.8rem, 4.5vw, 2.2rem);
   }
 }
 
 .continue-card-btn {
   margin-top: 2rem;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  background: linear-gradient(135deg, #e11d48, #be123c);
   color: #ffffff;
   border: none;
   padding: 14px 28px;
-  min-height: 48px;
+  min-height: 50px;
   font-size: 1.6rem;
+  font-weight: bold;
   font-family: 'Courgette', cursive, sans-serif;
   border-radius: 30px;
   cursor: pointer;
   touch-action: manipulation;
-  box-shadow: 0 5px 18px rgba(255, 117, 140, 0.5);
+  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.4);
   transition: all 0.3s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 280px;
 
   &:hover, &:active {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 117, 140, 0.7);
+    transform: scale(1.04);
+    background: linear-gradient(135deg, #be123c, #9f1239);
+    box-shadow: 0 8px 25px rgba(225, 29, 72, 0.6);
   }
 }
 
@@ -233,7 +274,8 @@
   min-height: 60px;
   cursor: pointer;
   touch-action: manipulation;
-  z-index: 100;
+  z-index: 10000;
+  pointer-events: auto !important;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

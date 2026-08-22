@@ -77,7 +77,8 @@
 }
 
 .appear {
-  animation: fade 2s linear 0s 1 reverse;
+  animation: fade 2s linear 0s 1 reverse forwards;
+  opacity: 1 !important;
 }
 
 .read {

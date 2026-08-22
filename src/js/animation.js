@@ -127,8 +127,11 @@ export const animate = function () {
       }, 4000);
     } else if (button.classList.contains("gift")) {
       /* 
-          When the gift is pressed, play sounds and show the love letter card (frames[1]).
-          Provide both a manual "See My Card & Photos" button and an auto-transition fallback.
+          When the gift box is clicked:
+          1. Pause haunted sound, play blast & Happy Birthday music.
+          2. Hide giftroom, fade out flash.
+          3. Display the Love Letter Modal (frames[1]) cleanly with active-frame class.
+          4. When "See Our Memories 💖 →" is clicked, fade out letter and reveal 6-photo carousel (frames[0]).
       */
 
       haunt.pause();
@@ -139,35 +142,36 @@ export const animate = function () {
       music.loop = true;
       music.play();
 
-      // Display the Love Letter Frame (frames[1])
+      // Show Love Letter Frame (frames[1])
       frames[1].style.display = "flex";
-      frames[1].style.zIndex = "50";
+      frames[1].classList.add("active-frame");
 
       setTimeout(() => {
-        frames[1].classList.add("appear");
         frames[1].style.opacity = "1";
         flash.style.display = "none";
-      }, 1000);
+      }, 500);
 
-      const proceedToCard = () => {
+      // Handle "See Our Memories 💖 →" click
+      const proceedToMemories = () => {
         if (frames[0].style.display === "flex") return;
+
         frames[1].style.opacity = "0";
         setTimeout(() => {
           frames[1].style.display = "none";
+          frames[1].classList.remove("active-frame");
+
+          // Reveal 6-Photo Carousel & Card (frames[0])
           frames[0].style.display = "flex";
           frames[0].classList.add("appear");
           frames[0].style.opacity = "1";
           initPolaroidGallery();
-        }, 400);
+        }, 500);
       };
 
       const continueBtn = document.getElementById("continueToCardBtn");
       if (continueBtn) {
-        continueBtn.addEventListener("click", proceedToCard);
+        continueBtn.addEventListener("click", proceedToMemories);
       }
-
-      // Auto-proceed fallback after 18 seconds
-      setTimeout(proceedToCard, 18000);
     }
   });
 };
