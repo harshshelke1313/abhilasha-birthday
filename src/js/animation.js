@@ -127,10 +127,9 @@ export const animate = function () {
       }, 4000);
     } else if (button.classList.contains("gift")) {
       /* 
-              when the gift is pressed, the gift scene vanishes and the white div fades slowly giving a sense 
-              of explosion. After that, the message frame appears and moves up until the message completes. Then,
-              the message frame fades away and the card appears.
-          */
+          When the gift is pressed, play sounds and show the love letter card (frames[1]).
+          Provide both a manual "See My Card & Photos" button and an auto-transition fallback.
+      */
 
       haunt.pause();
       blast.play();
@@ -140,48 +139,35 @@ export const animate = function () {
       music.loop = true;
       music.play();
 
-      if (!process.env.SCROLL_MSG) {
-        frames[0].style.display = "flex";
-        setTimeout(() => {
-          frames[0].classList.add("appear");
-          frames[0].style.opacity = "1";
-        }, 1500);
-        return;
-      }
-
-      //This value is stored in the --readTime css variable of root element and is calculated dynamically at build time.
-      const readTime =
-        parseInt(
-          getComputedStyle(document.documentElement).getPropertyValue(
-            "--readTime"
-          )
-        ) + 5;
-
+      // Display the Love Letter Frame (frames[1])
       frames[1].style.display = "flex";
+      frames[1].style.zIndex = "50";
 
       setTimeout(() => {
         frames[1].classList.add("appear");
         frames[1].style.opacity = "1";
-        msg.classList.add("move-up");
-      }, 1500);
-
-      setTimeout(() => {
-        msg.style.transform = "translateY(-100%)";
         flash.style.display = "none";
-      }, 5000);
+      }, 1000);
 
-      setTimeout(() => {
-        msgWindow.classList.add("fade-in");
-        msgWindow.style.opacity = "0";
-      }, readTime * 1000);
+      const proceedToCard = () => {
+        if (frames[0].style.display === "flex") return;
+        frames[1].style.opacity = "0";
+        setTimeout(() => {
+          frames[1].style.display = "none";
+          frames[0].style.display = "flex";
+          frames[0].classList.add("appear");
+          frames[0].style.opacity = "1";
+          initPolaroidGallery();
+        }, 400);
+      };
 
-      setTimeout(() => {
-        frames[1].style.display = "none";
-        frames[0].style.display = "flex";
-        frames[0].classList.add("appear");
-        frames[0].style.opacity = "1";
-        initPolaroidGallery();
-      }, (readTime + 3) * 1000);
+      const continueBtn = document.getElementById("continueToCardBtn");
+      if (continueBtn) {
+        continueBtn.addEventListener("click", proceedToCard);
+      }
+
+      // Auto-proceed fallback after 18 seconds
+      setTimeout(proceedToCard, 18000);
     }
   });
 };
